@@ -41,3 +41,33 @@ function checkIsValid(car) {
 }
 
 car.start(car.attributes.registrationNumber);
+
+var Vehicles = Backbone.Collection.extend({
+    model: Vehicle
+});
+
+var vehicles = new Vehicles();
+
+vehicles.add(new Car({registrationNumber: "XLI887", color: "Blue" }));
+vehicles.add(new Car({registrationNumber: "ZNP123", color: "Blue" }));
+vehicles.add(new Car({registrationNumber: "XUV456", color: "Gray" }));
+
+var blueVehicles = vehicles.where({color: "Blue"});
+
+console.log(blueVehicles);
+
+var regVehicle = vehicles.findWhere({registrationNumber: "XLI887"});
+
+console.log(regVehicle);
+
+vehicles.remove(regVehicle);
+
+console.log(vehicles);
+
+var convert = vehicles.toJSON();
+
+console.log(convert);
+
+var eachVehicle = vehicles.each(function(vehicle){
+    console.log(vehicle);
+});
